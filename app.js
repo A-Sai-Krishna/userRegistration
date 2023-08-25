@@ -25,7 +25,7 @@ initializeDBAndServer();
 
 app.post("/register", async (request, response) => {
   const { username, name, password, gender, location } = request.body;
-  const hashPassword = bcrypt.hash(password, 10);
+  const hashPassword =await bcrypt.hash(password, 10);
   const selectUserQuery = `
     SELECT *
     FROM
@@ -93,7 +93,7 @@ app.put("/change-password", async (request, response) => {
     );
     if (isPasswordMatched) {
       if (password.length > 4) {
-        const hashedPassword = bcrypt.hash(newPassword, 10);
+        const hashedPassword =await bcrypt.hash(newPassword, 10);
         const updatePasswordQuery = `
           UPDATE
           user
